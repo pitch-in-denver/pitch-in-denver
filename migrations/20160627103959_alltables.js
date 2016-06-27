@@ -21,7 +21,7 @@ exports.up = function(knex, Promise) {
       table.integer('type').references('id').inTable('account_type').onDelete('cascade');
       table.string('city');
       table.string('email');
-      table.integer('phone');
+      table.string('phone');
       table.text('bio');
     });
   }).then(function(){
