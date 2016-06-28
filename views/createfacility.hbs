@@ -1,0 +1,20 @@
+<h3>Create a facility:</h3>
+<br>
+<form action="/facility" method="POST">
+  <label for="facility_name">Facility Name</label>
+  <input id="facility_name" name="name" value="{{facility.name}}">
+  <label for="address">Address:</label>
+  <input id="address" name="address" value="{{facility.address}}">
+
+<br>
+  <label for="facility_type">Facility Type:</label>
+  <select class="input-field"id="facility_type" name="type_id" value="{{facility.type_id}}">
+    {{#each type}}
+    <option value="{{this.id}}">{{this.type}}</option>
+    {{/each}}
+  </select>
+<br>
+  <label for="details">Facility details:</label>
+  <textarea id="details" name="details" class="materialize-textarea">{{account.bio}}</textarea>
+  <button type="submit">Submit</button>
+</form>
