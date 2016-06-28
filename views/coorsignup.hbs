@@ -1,10 +1,11 @@
 <h4>Coordinator Signup</h4>
 <a href="">Login with Google</a>
+<h3>{{error}}</h3>
 <form action="/coorsignup" method="POST">
   <input type="hidden" name="type" value="coordinator">
   <label for="email">Email</label>
-  <input id="email" name="email">
+  <input type="email" id="email" name="email">
   <label for="password">Password</label>
-  <input id="password" name="password">
+  <input type="password" id="password" name="password">
   <button type="submit">Submit</button>
 </form>
