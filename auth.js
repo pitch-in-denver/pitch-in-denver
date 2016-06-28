@@ -3,18 +3,19 @@ var bcrypt = require('bcrypt');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 
-passport.use(new LocalStrategy(function(email, password, done) {
-  // console.log('logging in');
-  db.findUserByEmail(email).then(function(email) {
-    // console.log('after finding user', err, user);
-    console.log(email);
-    if (!email) {
-      done("Error: User does not exist.", null);
-    } else if (email && bcrypt.compareSync(password, user.password)) {
-      done(null, email); // null because 1st arg is error msg
-    } else {
-      done("Error: Password is incorrect.");
-    }
+passport.use(new LocalStrategy({
+  usernameField:'email'}, //This changes passportStrategy from username to email
+  function(email, password, done) {
+  db.findUserByEmail(email).then(function(user) {
+    db.findPasswordById(user.id).then(function(local) {
+       if (!user) {
+         done("Error: User does not exist.", null);
+       } else if (email && bcrypt.compareSync(password, local.password)) {
+         done(null, user); // null because 1st arg is error msg
+       } else {
+         done("Error: Password is incorrect.");
+       }
+     })
   });
 }));
 
