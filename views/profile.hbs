@@ -1,2 +1,36 @@
-<h1>Profile</h1>
-{{account.id}}
+<h3>Your {{#if volunteer}}Volunteer{{else}}Coordinator{{/if}} Profile</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>First Name</td>
+      <td>{{account.first_name}}</td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td>{{account.last_name}}</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td>{{account.email}}</td>
+    </tr>
+    <tr>
+      <td>Phone</td>
+      <td>{{account.phone}}</td>
+    </tr>
+    <tr>
+      <td>Volunteer activities</td>
+      <td>{{activities.activity}}</td>
+    </tr>
+    <tr>
+      <td>City</td>
+      <td>{{account.city}}</td>
+    </tr>
+    <tr>
+      <td>Bio</td>
+      <td>{{account.bio}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<a href="/profile/edit" class="waves-effect waves-light btn">Edit Profile</a>

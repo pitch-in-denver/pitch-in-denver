@@ -15,7 +15,6 @@ router.post('/volsignup', function(req, res, next){ // add auth.isLoggedIn,
       res.render('volsignup', {error: 'Error: User already exists.'});
     } else {
       auth.createUser(req.body).then(function(id){
-        console.log('this better fucking work', id);
         req.session.userId = id[0];
         res.redirect('/profile');
       });
