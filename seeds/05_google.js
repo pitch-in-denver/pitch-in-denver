@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
         // Inserts seed entries
         knex('google').insert(
           {
-            account:find.findFromList("Laney", account, "first_name"),
+            account_id:find.findFromList("Laney", account, "first_name"),
             google_id:'101708887710856880655'
          })
       ]);

@@ -4,24 +4,42 @@ var knex = require('../db/knex');
 var db = require('../db/api');
 var auth = require('../auth');
 
+// VOLUNTEER SIGNUP
 router.get('/volsignup', function(req, res, next) {
   res.render('volsignup');
 });
-router.post('/volsignup', function(req, res, next){
-  db.findIdByType(req.body.type).then(function (type){
-    console.log(type);
-    return knex('account').insert({email: req.body.email, type: type.id}).returning('id').then(function (id){
-      console.log(id);
-      return knex('local').insert({account: id[0], password: req.body.password});
-    }).then(function(){
-      res.redirect('/profile');
-    });
-  });
 
+router.post('/volsignup', function(req, res, next){ // add auth.isLoggedIn,
+  db.findUserByEmail(req.body.email).then(function(email){
+    if (email) {
+      res.render('volsignup', {error: 'Error: User already exists.'});
+    } else {
+      auth.createUser(req.body).then(function(id){
+        console.log('this better fucking work', id);
+        req.session.userId = id[0];
+        res.redirect('/profile');
+      });
+    }
+  });
 });
+
+// COORDINATOR SIGNUP
 router.get('/coorsignup', function(req, res, next) {
   res.render('coorsignup');
 });
 
+router.post('/coorsignup', function(req, res, next){
+  db.findUserByEmail(req.body.email).then(function(email){
+    if (email) {
+      res.render('coorsignup', {error: 'Error: User already exists.'});
+    } else {
+      auth.createUser(req.body).then(function(id){
+        console.log('this better fucking work', id);
+        req.session.userId = id[0];
+        res.redirect('/profile');
+      });
+    }
+  });
+});
 
 module.exports = router;

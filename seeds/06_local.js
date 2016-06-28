@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
         // Inserts seed entries
         knex('local').insert(
           {
-            account:find.findFromList("Jerome", account, "first_name"),
+            account_id:find.findFromList("Jerome", account, "first_name"),
             password:'Texas4eva'
          })
       ]);

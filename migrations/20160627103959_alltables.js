@@ -26,12 +26,12 @@ exports.up = function(knex, Promise) {
     });
   }).then(function(){
     return knex.schema.createTable('google', function(table) {
-      table.integer('account').references('id').inTable('account').onDelete('cascade');
+      table.integer('account_id').references('id').inTable('account').onDelete('cascade');
       table.string('google_id');
     });
   }).then(function(){
     return knex.schema.createTable('local', function(table) {
-      table.integer('account').references('id').inTable('account').onDelete('cascade');
+      table.integer('account_id').references('id').inTable('account').onDelete('cascade');
       table.string('password');
     });
   }).then(function(){
