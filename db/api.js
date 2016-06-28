@@ -5,7 +5,8 @@ module.exports = {
     return knex('account_type').select('id').where({type: type}).first();
   },
   isVolunteer: function (id) {
-  // var type = knex('account_type').select('type').where({id: id}).first();
+  // return knex('account_type').select('type').where({id: id}).first().then(function (type) {
+  //
   // console.log('type=', type);
     if (id % 2 === 0) {
       console.log('false');
@@ -14,9 +15,13 @@ module.exports = {
       console.log('true');
     return true;
     }
+  // });
   },
   findUserByEmail: function (email) {
     return knex('account').select().where({email: email}).first().first();
+  },
+  findUserById: function (id) {
+    return knex('account').select().where({id: id}).first();
   },
   addAccount: function (body, type) {
     return knex('account').insert({email: body.email, type: type.id}).returning('id');

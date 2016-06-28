@@ -1,9 +1,11 @@
-<h3>Edit your profile</h3>
+<h5>Edit Your {{#if volunteer}}Volunteer{{else}}Coordinator{{/if}} Profile</h5>
+
 <form action="/profile/edit" method="POST">
   <label for="first_name">First Name</label>
   <input id="first_name" name="first_name" value="{{account.first_name}}">
   <label for="last_name">Last Name</label>
   <input id="last_name" name="last_name" value="{{account.last_name}}">
+
   {{#if volunteer}}
 
     <div class="input-field">
@@ -17,6 +19,7 @@
     </div>
 
   {{else}}
+
     <label for="title">Title</label>
     <input id="title" name="title" value="{{coordinator.title}}">
 
@@ -31,5 +34,6 @@
   <input type="tel" id="phone" name="phone" value="{{account.phone}}">
   <label for="bio">Bio</label>
   <textarea id="bio" name="bio" class="materialize-textarea">{{account.bio}}</textarea>
-  <button type="submit">Submit</button>
+  <button class="waves-effect waves-light btn" type="submit">Submit Changes</button>
+  <a href="/profile"><button class="waves-effect waves-light btn" type="button" name="button">Back</button></a>
 </form>
