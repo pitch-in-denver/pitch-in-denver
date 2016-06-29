@@ -11,8 +11,7 @@ var routes = require('./routes/index');
 var signup = require('./routes/signup');
 var profile = require('./routes/profile');
 var login = require('./routes/login');
-var events = require('./routes/events')
-
+var events = require('./routes/events');
 
 
 var app = express();
