@@ -1,39 +1,45 @@
-<h5>Edit Your {{#if volunteer}}Volunteer{{else}}Coordinator{{/if}} Profile</h5>
+<div class="col s12 m6 offset-m3">
 
-<form action="/profile/edit" method="POST">
-  <label for="first_name">First Name</label>
-  <input id="first_name" name="first_name" value="{{account.first_name}}">
-  <label for="last_name">Last Name</label>
-  <input id="last_name" name="last_name" value="{{account.last_name}}">
+    <h5>Edit Your {{#if volunteer}}Volunteer{{else}}Coordinator{{/if}} Profile</h5>
 
-  {{#if volunteer}}
+    <form action="/profile/edit" method="POST">
+        <label for="first_name">First Name</label>
+        <input id="first_name" name="first_name" value="{{account.first_name}}">
+        <label for="last_name">Last Name</label>
+        <input id="last_name" name="last_name" value="{{account.last_name}}">
 
-    <div class="input-field">
-      <select id="activity_id" name="activity_id">
-        <option value="" disabled selected>Choose your activity</option>
-        {{#each activities}}
-          <option value="{{this.id}}">{{this.activity}}</option>
-        {{/each}}
-      </select>
-      <label for="activity_id">Volunteer Activity</label>
-    </div>
+        {{#if volunteer}}
 
-  {{else}}
-<!--
+            <div class="input-field">
+                <select id="activity_id" name="activity_id">
+                    <option value="" disabled selected>Choose your activity</option>
+                    {{#each activities}}
+                        <option value="{{this.id}}">{{this.activity}}</option>
+                    {{/each}}
+                </select>
+                <label for="activity_id">Volunteer Activity</label>
+            </div>
+
+        {{else}}
+            <!--
     <label for="title">Title</label>
     <input id="title" name="title" value="{{coordinator.title}}"> -->
 
-  {{/if}}
+        {{/if}}
 
-<br>
-  <label for="city">City</label>
-  <input id="city" name="city" value="{{account.city}}">
-  <label for="email">Email</label>
-  <input id="email" name="email" value="{{account.email}}">
-  <label for="phone">Phone</label>
-  <input type="tel" id="phone" name="phone" value="{{account.phone}}">
-  <label for="bio">Bio</label>
-  <textarea id="bio" name="bio" class="materialize-textarea">{{account.bio}}</textarea>
-  <button class="waves-effect waves-light btn" type="submit">Submit Changes</button>
-  <a href="/profile"><button class="waves-effect waves-light btn" type="button" name="button">Back</button></a>
-</form>
+        <br>
+        <label for="city">City</label>
+        <input id="city" name="city" value="{{account.city}}">
+        <label for="email">Email</label>
+        <input id="email" name="email" value="{{account.email}}">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" value="{{account.phone}}">
+        <label for="bio">Bio</label>
+        <textarea id="bio" name="bio" class="materialize-textarea">{{account.bio}}</textarea>
+        <button class="waves-effect waves-light btn" type="submit">Submit Changes</button>
+        <a href="/profile">
+            <button class="waves-effect waves-light btn" type="button" name="button">Back</button>
+        </a>
+    </form>
+
+</div>
