@@ -1,5 +1,3 @@
-// require('md-date-time-picker').load()
-// require('pickadate').load()
 
 $(document).ready(function() {
     $('select').material_select();
@@ -10,7 +8,7 @@ $(document).ready(function() {
     selectYears: 15 // Creates a dropdown of 15 years to control year
   });
 
-  $('.timepicker').pickatime()
+  $('.timepicker').timepicker()
 
 
   });

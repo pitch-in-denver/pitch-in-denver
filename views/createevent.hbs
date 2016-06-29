@@ -1,23 +1,24 @@
 
 <h3>Create an Event:</h3>
 <br>
-<form action="/facility" method="POST">
-  <label for="facility_name">Event Name</label>
-  <input id="facility_name" name="name" value="{{event.name}}">
+<form action="/events/create" method="POST">
+  <label for="event_name">Event Title</label>
+  <input id="event_name" name="title">
   <label for="address">Address:</label>
-  <input id="address" name="address" value="{{event.address}}">
+  <input id="address" name="address">
+  <input type="hidden" name="account_id" value="{{account_id}}">
 
 <br>
 <br>
   <label for="details">Event details:</label>
   <textarea id="details" name="details" class="materialize-textarea"></textarea>
-  <label for="start_time">Event Date:</label>
-  <input type="date" class="datepicker" name="date">
+  <label for="event_date">Event Date:</label>
+  <input id="event_date" type="date" class="datepicker" name="date">
   <label for="start_time">Start Time:</label>
-  <input class="timepicker" type="time" name="text">
-  <label for="start_time">End Time:</label>
-  <input class="timepicker" type="time" name="text">
+  <input id="start_time" class="timepicker" type="text" name="start_time">
+  <label for="end_time">End Time:</label>
+  <input id="end_time" class="timepicker" type="text" name="end_time">
   <label for="event_description">Event Description:</label>
-  <textarea id="event_description" name="details" class="materialize-textarea"></textarea>
+  <textarea id="event_description" name="description" class="materialize-textarea"></textarea>
   <button type="submit" class="waves-effect waves-light btn">Submit</button>
 </form>

@@ -12,12 +12,12 @@ exports.seed = function(knex, Promise) {
         knex('event').insert(
           {
             account_id:find.findFromList('Jerome', account, "first_name"),
-            facility_id:find.findFromList('Eternal Rest', facility, "name"),
             title:'Music for Beverly\'s birthday.',
             address:'City Park',
             details:'Street Parking is difficult.',
-            start_time:'2016-07-22 15:00:00',
-            end_time:'2016-07-22 18:00:00',
+            start_time:'15:00',
+            end_time:'18:00',
+            date:'08-13-2016',
             description:'Great event for the old folks.'
          })
       ]);

@@ -56,13 +56,14 @@ exports.up = function(knex, Promise) {
     return knex.schema.createTable('event', function(table) {
       table.increments();
       table.integer('account_id').references('id').inTable('account').onDelete('cascade');
-      table.integer('facility_id').references('id').inTable('facility').onDelete('cascade');
       table.string('title');
       table.text('address');
       table.text('details');
-      table.dateTime('start_time');
-      table.dateTime('end_time');
+      table.string('start_time');
+      table.string('end_time');
+      table.date('date');
       table.text('description');
+
     });
   }).then(function(){
     return knex.schema.createTable('vol_event', function(table) {
