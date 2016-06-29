@@ -52,3 +52,6 @@
 <a href="/profile/edit" class="waves-effect waves-light btn">Edit Profile</a>
 <a href="/login/logout"><button class="waves-effect waves-light btn" type="button" name="button">logout</button></a>
 <a href="/"><button class="waves-effect waves-light btn" type="button" name="button">Home</button></a>
+{{#unless volunteer}}
+<a href="/facility"><button type="button" name="button" class="waves-effect waves-light btn">Create an Event</button></a>
+{{/unless}}
