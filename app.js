@@ -14,6 +14,7 @@ var login = require('./routes/login');
 var facility = require('./routes/facility')
 
 
+
 var app = express();
 app.use(auth.passport.initialize());
 

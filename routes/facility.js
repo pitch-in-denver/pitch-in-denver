@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var knex = require('../db/knex');
+var moment = require('moment');
+// var pickadate = require('pickadate');
+
+
 
 router.get('/facility', function(req, res, next) {
     return knex('facility_type').select().then(function(types) {
