@@ -23,6 +23,7 @@ router.get('/profile', function(req, res, next) {
       console.log(err);
     });
   } else {
+        console.log("Have started Else Statement")
     Promise.all([
       knex('account').where({id: req.session.userId}).first(),
       knex('coordinator')
@@ -33,8 +34,11 @@ router.get('/profile', function(req, res, next) {
         .where({account_id: req.session.userId})
         .first()
         // add knex query for facilites associated with
+
     ]).then(function(data) {
+      console.log("Now we're here Data = ", data)
       var volunteer = db.isVolunteer(data[0].type);
+      console.log(data[1]);
       res.render('profile', {account: data[0], title: data[1], volunteer: volunteer});
     }).catch(function (err) {
       console.log(err);
@@ -51,26 +55,24 @@ router.get('/profile/edit', function(req, res, next) {
       knex('account').where({id: req.session.userId}).first(),
       knex('volunteer_activity').select()
     ]).then(function(data){
-      console.log('profile-edit/vol data =', data);
       var volunteer = db.isVolunteer(data[0].type);
       console.log('volunteer?', volunteer);
       res.render('profile-edit', {account: data[0], activities: data[1], volunteer: volunteer});
     });
   } else {
     return Promise.all([
-      knex('account').where({id: req.session.userId}).first(),
-      knex('coordinator')
-        .select('coordinator.title')
-        .join('account', function() {
-          this.on('coordinate.account_id', '=', 'account.id');
-        })
-        .where({account_id: req.session.userId})
-        .first()
+      knex('account').where({id: req.session.userId}).first()
+      // knex('coordinator')
+      //   .select('coordinator.title')
+      //   .join('account', function() {
+      //     this.on('coordinate.account_id', '=', 'account.id');
+      //   })
+      //   .where({account_id: req.session.userId})
+      //   .first()
     ]).then(function(data){
-      console.log('profile-edit/coord data =', data);
       var volunteer = db.isVolunteer(data[0].type);
       console.log('volunteer?', volunteer);
-      res.render('profile-edit', {account: data[0], title: data[1], volunteer: volunteer});
+      res.render('profile-edit', {account: data[0], volunteer: volunteer});
     });
   }
 });
@@ -81,15 +83,16 @@ router.post('/profile/edit', function(req, res, next) {
     return Promise.all([
       knex('account').where({id: req.session.userId}).update({first_name: req.body.first_name, last_name: req.body.last_name, city: req.body.city, email: req.body.email, phone: req.body.phone, bio: req.body.bio}),
       // db.findUserInTable
-      knex('volunteer').update({account_id: req.session.userId, activity_id: req.body.activity})
+      knex('volunteer').update({activity_id: req.body.activity_id}).where({account_id: req.session.userId})
     ]).then(function () {
       res.redirect('/profile');
     });
   } else {
+    console.log("Hi")
+    console.log(req.body)
     return Promise.all([
-      knex('account').where({id: req.session.userId}).update({first_name: req.body.first_name, last_name: req.body.last_name, city: req.body.city, email: req.body.email, phone: req.body.phone, bio: req.body.bio}),
-      // knex.raw('INSERT INTO coordinator (a,b,c) values (?, ?, ?) ON DUPLICATE KEY UPDATE c=c+1', [1, 2, 3])
-      knex('coordinator').insert({account_id: req.session.userId, title: req.body.title})
+      knex('account').where({id: req.session.userId}).update({first_name: req.body.first_name, last_name: req.body.last_name, city: req.body.city, email: req.body.email, phone: req.body.phone, bio: req.body.bio})
+      // knex('coordinator').update({title: req.body.title}).where({account_id: req.session.userId})
     ]).then(function () {
       res.redirect('/profile');
     });

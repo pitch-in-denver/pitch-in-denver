@@ -14,9 +14,12 @@ router.post('/volsignup', function(req, res, next){ // add auth.isLoggedIn,
     if (email) {
       res.render('volsignup', {error: 'Error: User already exists.'});
     } else {
-      auth.createUser(req.body).then(function(id){
+      auth.createUser(req.body).then(function(id){    return knex('volunteer').insert({account_id:id[0]}).returning('account_id').then(function(id) {
         req.session.userId = id[0];
+        console.log(id[0]);
         res.redirect('/profile');
+        })
+
       });
     }
   });
@@ -33,10 +36,9 @@ router.post('/coorsignup', function(req, res, next){
       res.render('coorsignup', {error: 'Error: User already exists.'});
     } else {
       auth.createUser(req.body).then(function(id){
-        console.log('this better fucking work', id);
-        req.session.userId = id[0];
-        res.redirect('/profile');
-      });
+          req.session.userId = id[0];
+          res.redirect('/profile');
+          })
     }
   });
 });

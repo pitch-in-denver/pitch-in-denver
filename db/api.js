@@ -5,9 +5,7 @@ module.exports = {
     return knex('account_type').select('id').where({type: type}).first();
   },
   isVolunteer: function (id) {
-  // return knex('account_type').select('type').where({id: id}).first().then(function (type) {
-  //
-  // console.log('type=', type);
+
     if (id % 2 === 0) {
       console.log('false');
       return false;
@@ -15,7 +13,7 @@ module.exports = {
       console.log('true');
     return true;
     }
-  // });
+
   },
   findUserByEmail: function (email) {
     return knex('account').select().where({email: email}).first().first();
