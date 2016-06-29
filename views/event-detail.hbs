@@ -13,7 +13,7 @@
                         <b>Location Details:</b> {{event.details}}
                     </p>
                     <p>
-                        <b>Date:</b> {{event.date}}
+                        <b>Date:</b> {{event.id}} {{event.date}}
                         <br>
                         <b>Start Time:</b> {{event.start_time}}
                         <br>
@@ -29,7 +29,7 @@
                         {{/each}}
                     </p>
                     <p>
-                      <a href="/events/{{this.id}}/volunteer">Volunteer for this event</a>
+                      <a href="/events/{{event.id}}/volunteer">Volunteer for this event</a>
                     </p>
                 </div>
             </div>
