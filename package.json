@@ -15,10 +15,13 @@
     "express": "~4.13.1",
     "hbs": "~3.1.0",
     "knex": "^0.11.7",
+    "md-date-time-picker": "^2.1.0",
+    "moment": "^2.13.0",
     "morgan": "~1.6.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pg": "^6.0.1",
+    "pickadate": "^3.5.6",
     "serve-favicon": "~2.3.0"
   }
 }
