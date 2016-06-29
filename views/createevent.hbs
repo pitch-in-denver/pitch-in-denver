@@ -1,25 +1,24 @@
 <div class="col s12 m6 offset-m3">
-
-<h3>Create an Event:</h3>
-<br>
-<form action="/events/create" method="POST">
-  <label for="event_name">Event Title</label>
-  <input id="event_name" name="title">
-  <label for="address">Address:</label>
-  <input id="address" name="address">
-  <input type="hidden" name="account_id" value="{{account_id}}">
-<br>
-<br>
-  <label for="details">Location Details:</label>
-  <textarea id="details" name="details" class="materialize-textarea"></textarea>
-  <label for="event_date">Event Date:</label>
-  <input id="event_date" type="date" class="datepicker" name="date">
-  <label for="start_time">Start Time:</label>
-  <input id="start_time" class="timepicker" type="text" name="start_time">
-  <label for="end_time">End Time:</label>
-  <input id="end_time" class="timepicker" type="text" name="end_time">
-  <label for="event_description">Event Description:</label>
-  <textarea id="event_description" name="description" class="materialize-textarea"></textarea>
-  <button type="submit" class="waves-effect waves-light btn">Submit</button>
-</form>
+    <h3>Create an Event:</h3>
+    <br>
+    <form action="/events/create" method="POST">
+        <label for="event_name">Event Title</label>
+        <input id="event_name" name="title">
+        <label for="address">Address:</label>
+        <input id="address" name="address">
+        <input type="hidden" name="account_id" value="{{account_id}}">
+        <br>
+        <br>
+        <label for="details">Location Details:</label>
+        <textarea id="details" name="details" class="materialize-textarea"></textarea>
+        <label for="event_date">Event Date:</label>
+        <input id="event_date" type="date" class="datepicker" name="date">
+        <label for="start_time">Start Time:</label>
+        <input id="start_time" class="timepicker" type="text" name="start_time">
+        <label for="end_time">End Time:</label>
+        <input id="end_time" class="timepicker" type="text" name="end_time">
+        <label for="event_description">Event Description:</label>
+        <textarea id="event_description" name="description" class="materialize-textarea"></textarea>
+        <button type="submit" class="waves-effect waves-light btn">Submit</button>
+    </form>
 </div>

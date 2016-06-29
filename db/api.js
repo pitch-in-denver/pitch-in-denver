@@ -5,15 +5,11 @@ module.exports = {
     return knex('account_type').select('id').where({type: type}).first();
   },
   isVolunteer: function (id) {
-
     if (id % 2 === 0) {
-      console.log('false');
       return false;
     } else {
-      console.log('true');
-    return true;
+      return true;
     }
-
   },
   findUserByEmail: function (email) {
     return knex('account').select().where({email: email}).first().first();
