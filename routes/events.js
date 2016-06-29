@@ -46,7 +46,7 @@ router.post('/events/create', function(req, res, next) {
       return Promise.all([
         knex('event').select().where({id: req.params.id}).first(),
         knex('event')
-          .select('account.first_name', 'account.last_name')
+          .select('account.first_name', 'account.last_name','account.email')
           .join('vol_event', function() {
             this.on('vol_event.event_id', '=', 'event.id');
           })
