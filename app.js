@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var auth = require('./auth');
 var session = require('cookie-session');
 
-var routes = require('./routes/index');
+// var routes = require('./routes/index');
 var signup = require('./routes/signup');
 var profile = require('./routes/profile');
 var login = require('./routes/login');
@@ -32,7 +32,7 @@ app.use(session({keys: [process.env.SESSION_KEY1, process.env.SESSION_KEY2]}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/', routes);
+// app.use('/', routes);
 app.use('/', signup);
 app.use('/', profile);
 app.use('/', login);

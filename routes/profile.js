@@ -18,12 +18,12 @@ router.get('/profile', function(req, res, next) {
         .first()
     ]).then(function(data) {
       var volunteer = db.isVolunteer(data[0].type);
-      res.render('profile', {account: data[0], activities: data[1], volunteer: volunteer});
+      res.render('profile', {account: data[0], activities: data[1], volunteer: volunteer, id: req.session.userId});
     }).catch(function (err) {
       console.log(err);
     });
   } else {
-        console.log("Have started Else Statement")
+        console.log("Have started Else Statement");
     Promise.all([
       knex('account').where({id: req.session.userId}).first(),
       knex('coordinator')
@@ -36,10 +36,10 @@ router.get('/profile', function(req, res, next) {
         // add knex query for facilites associated with
 
     ]).then(function(data) {
-      console.log("Now we're here Data = ", data)
+      console.log("Now we're here Data = ", data);
       var volunteer = db.isVolunteer(data[0].type);
       console.log(data[1]);
-      res.render('profile', {account: data[0], title: data[1], volunteer: volunteer});
+      res.render('profile', {account: data[0], title: data[1], volunteer: volunteer, id: req.session.userId});
     }).catch(function (err) {
       console.log(err);
     });
@@ -57,7 +57,7 @@ router.get('/profile/edit', function(req, res, next) {
     ]).then(function(data){
       var volunteer = db.isVolunteer(data[0].type);
       console.log('volunteer?', volunteer);
-      res.render('profile-edit', {account: data[0], activities: data[1], volunteer: volunteer});
+      res.render('profile-edit', {account: data[0], activities: data[1], volunteer: volunteer, id: req.session.userId});
     });
   } else {
     return Promise.all([
@@ -72,7 +72,7 @@ router.get('/profile/edit', function(req, res, next) {
     ]).then(function(data){
       var volunteer = db.isVolunteer(data[0].type);
       console.log('volunteer?', volunteer);
-      res.render('profile-edit', {account: data[0], volunteer: volunteer});
+      res.render('profile-edit', {account: data[0], volunteer: volunteer, id: req.session.userId});
     });
   }
 });
@@ -88,8 +88,8 @@ router.post('/profile/edit', function(req, res, next) {
       res.redirect('/profile');
     });
   } else {
-    console.log("Hi")
-    console.log(req.body)
+    console.log("Hi");
+    console.log(req.body);
     return Promise.all([
       knex('account').where({id: req.session.userId}).update({first_name: req.body.first_name, last_name: req.body.last_name, city: req.body.city, email: req.body.email, phone: req.body.phone, bio: req.body.bio})
       // knex('coordinator').update({title: req.body.title}).where({account_id: req.session.userId})

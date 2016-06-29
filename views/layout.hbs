@@ -16,8 +16,11 @@
             <a id="logo-container" href="#" class="brand-logo">Pitch In!</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="/profile">Home <i class="fa fa-home"></i></a></li>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/login/logout">Logout</a></li>
+                {{#if id}}
+                  <li><a href="/login/logout">Logout</a></li>
+                {{else}}
+                  <li><a href="/login">Login</a></li>
+                {{/if}}
             </ul>
             <ul id="nav-mobile" class="side-nav">
                 <li><a href="/login">Login</a></li>

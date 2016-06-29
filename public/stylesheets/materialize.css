@@ -4581,7 +4581,7 @@ small {
 }
 
 .card.large {
-  height: 500px;
+  height: auto;
 }
 
 .card .card-image {
