@@ -7,10 +7,20 @@ router.get('/events', function (req, res, next) {
   return knex('event').select().then(function (data) {
     res.render('events', {events: data, id: req.session.userId});
   });
+});
+
+router.get('/events/create', function(req, res, next) {
+    // console.log(req.session.userId);
+    res.render('createevent', {account_id: req.session.userId});
+});
+
+router.post('/events/create', function(req, res, next) {
+  return knex('event').insert(req.body).then(function () {
+    res.redirect('/events');
+  });
+});
     // db.findUserById(req.session.userId).then(function (user) {
     // if (db.isVolunteer(user.type)) {
-
-
     //
     //   Promise.all([
     //     knex('account').where({id: req.session.userId}).first(),
@@ -32,8 +42,6 @@ router.get('/events', function (req, res, next) {
     //
     // }
 
-});
-
 router.get('/events/:id', function (req, res, next) {
   return Promise.all([
     knex('event').select().where({id: req.params.id}).first(),
@@ -53,17 +61,6 @@ router.get('/events/:id', function (req, res, next) {
   });
 });
 
-
-router.get('/events/create', function(req, res, next) {
-    console.log(req.session.userId);
-    res.render('createevent', {account_id:req.session.userId});
-});
-
-router.post('/events/create', function(req, res, next) {
-  return knex('event').insert(req.body).then(function () {
-    res.redirect('/events');
-  });
-});
 
 //
 router.get('/events/:id/volunteer', function(req, res, next) {
