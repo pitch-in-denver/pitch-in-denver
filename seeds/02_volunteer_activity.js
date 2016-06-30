@@ -4,12 +4,12 @@ exports.seed = function(knex, Promise) {
         // Inserts seed entries
         knex('volunteer_activity').insert(
           {
-            activity:'musician'
+            activity:'Musician'
 
          }),
         knex('volunteer_activity').insert(
           {
-            activity:'therapy animal'
+            activity:'Therapy Animal'
 
         })
       ]);

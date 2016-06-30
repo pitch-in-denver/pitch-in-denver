@@ -9,6 +9,15 @@
         <input type="hidden" name="account_id" value="{{account_id}}">
         <br>
         <br>
+        <div class="input-field">
+            <select id="activity_id" name="activity_id">
+                <option value="" disabled selected>Choose your activity</option>
+                {{#each activities}}
+                    <option value="{{this.id}}">{{this.activity}}</option>
+                {{/each}}
+            </select>
+            <label for="activity_id">Volunteer Activity</label>
+        </div>
         <label for="details">Location Details:</label>
         <textarea id="details" name="details" class="materialize-textarea"></textarea>
         <label for="event_date">Event Date:</label>

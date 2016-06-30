@@ -7,17 +7,26 @@ var auth = require('../auth')
 
 router.get('/events', auth.isNotLoggedIn, function (req, res, next) {
   return Promise.all([
-    knex('event').select(),
+    knex('event').select()
+    .join('volunteer_activity', function() {
+      this.on('volunteer_activity.id', '=', 'event.activity_id')
+    }),
     db.isVolunteer(req.session.userId)
   ]).then(function(data) {
+    console.log(data)
     res.render('events', {events: data[0], volunteer: data[1], id: req.session.userId});
   });
 });
 
 router.get('/events/create', auth.isNotLoggedIn, function(req, res, next) {
-    db.isVolunteer(req.session.userId).then(function (data) {
-      res.render('createevent', {account_id: req.session.userId, volunteer:data, id: req.session.userId});
-    })
+  return Promise.all([
+    db.isVolunteer(req.session.userId),
+    knex('volunteer_activity').select()
+  ])
+  .then(function (data) {
+    console.log(data);
+    res.render('createevent', {account_id: req.session.userId, volunteer:data[0], id: req.session.userId, activities:data[1]});
+  });
 
 });
 

@@ -12,12 +12,12 @@ exports.seed = function(knex, Promise) {
             knex('volunteer').insert(
               {
                 account_id:find.findFromList('Laney', account, "first_name"),
-                activity_id:find.findFromList('musician', volunteer_activity, "activity")
+                activity_id:find.findFromList('Musician', volunteer_activity, "activity")
              }),
              knex('volunteer').insert(
              {
                account_id:find.findFromList('Jerome', account, "first_name"),
-               activity_id:find.findFromList('therapy animal', volunteer_activity, "activity")
+               activity_id:find.findFromList('Therapy Animal', volunteer_activity, "activity")
             })
           ]);
     })

@@ -63,6 +63,7 @@ exports.up = function(knex, Promise) {
       table.string('end_time');
       table.date('date');
       table.text('description');
+      table.integer('activity_id').references('id').inTable('volunteer_activity').onDelete('cascade');
 
     });
   }).then(function(){
