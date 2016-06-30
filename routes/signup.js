@@ -5,7 +5,8 @@ var db = require('../db/api');
 var auth = require('../auth');
 
 // VOLUNTEER SIGNUP
-router.get('/volsignup', auth.isLoggedIn, function(req, res, next) {
+router.get('/volsignup', function(req, res, next) {
+  req.session = null;
   res.render('volsignup');
 });
 
@@ -26,7 +27,8 @@ router.post('/volsignup', function(req, res, next){ // add auth.isLoggedIn,
 });
 
 // COORDINATOR SIGNUP
-router.get('/coorsignup', auth.isLoggedIn, function(req, res, next) {
+router.get('/coorsignup', function(req, res, next) {
+  req.session = null;
   res.render('coorsignup');
 });
 

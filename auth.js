@@ -36,8 +36,10 @@ module.exports = {
   },
   isLoggedIn: function(req, res, next) {
     if (req.session.userId) {
+      console.log('LOGGED IN');
       res.redirect('/profile');
     } else {
+      console.log('NOT FUCKING LOGGED IN');
       next();
     }
   },
