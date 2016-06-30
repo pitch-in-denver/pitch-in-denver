@@ -29,7 +29,9 @@
                         {{/each}}
                     </p>
                     <p>
-                      <a href="/events/{{event.id}}/volunteer">Volunteer for this event</a>
+                        {{#if volunteer}}
+                            <a href="/events/{{event.id}}/volunteer">Volunteer for this event</a>
+                        {{/if}}
                     </p>
                 </div>
             </div>
