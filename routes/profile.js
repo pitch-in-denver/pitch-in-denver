@@ -70,7 +70,7 @@ router.get('/profile/edit', function(req, res, next) {
 				knex('volunteer_activity').select(),
 				db.isVolunteer(req.session.userId)
 			]).then(function(data) {
-				console.log('volunteer?', volunteer);
+				// console.log('volunteer?', volunteer);
 				res.render('profile-edit', {
 					account: data[0],
 					activities: data[1],

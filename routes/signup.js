@@ -17,7 +17,7 @@ router.post('/volsignup', function(req, res, next){ // add auth.isLoggedIn,
       auth.createUser(req.body).then(function(id){    return knex('volunteer').insert({account_id:id[0]}).returning('account_id').then(function(id) {
         req.session.userId = id[0];
         console.log(id[0]);
-        res.redirect('/events');
+        res.redirect('/profile/edit');
         })
 
       });
