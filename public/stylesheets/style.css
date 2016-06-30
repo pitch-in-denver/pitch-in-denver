@@ -73,3 +73,11 @@ footer.page-footer {
 #make-it-pop {
   text-shadow:2px 2px grey;
 }
+
+#signupfix {
+  margin-top:28px;
+}
+
+.frontlist {
+  list-style:circle;
+}
