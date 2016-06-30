@@ -6,6 +6,7 @@ var auth = require('../auth');
 
 // VOLUNTEER SIGNUP
 router.get('/volsignup', auth.isLoggedIn, function(req, res, next) {
+  
   res.render('volsignup');
 });
 
