@@ -73,5 +73,5 @@ router.get('/events/:id/volunteer', auth.isNotLoggedIn, function(req, res, next)
     next(error);
   });
 });
-
+//test
 module.exports = router;
