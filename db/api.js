@@ -5,12 +5,31 @@ module.exports = {
     return knex('account_type').select('id').where({type: type}).first();
   },
   isVolunteer: function (id) {
-    if (id % 2 === 0) {
-      return false;
-    } else {
-      return true;
-    }
+    // console.log('req.session.userId = ', id);
+    return knex('account')
+      .select('account_type.type')
+      .where('account.id', '=', id)
+      .join('account_type', function() {
+        this.on('account_type.id', '=', 'account.type');
+      })
+      .first()
+      .then(function(result) {
+        // console.log('isVolTrue type=', result.type);
+        if (result.type == "volunteer") {
+          return true;
+        } else {
+          return false;
+        }
+      });
   },
+  //
+  // isVolunteer: function (id) {
+  //   if (id % 2 === 0) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // },
   findUserByEmail: function (email) {
     return knex('account').select().where({email: email}).first().first();
   },
