@@ -43,6 +43,7 @@ module.exports = {
   },
   isNotLoggedIn: function(req, res, next) {
     if (!req.session.userId) {
+      console.log("I'm working????")
       res.redirect('/');
     } else {
       next();

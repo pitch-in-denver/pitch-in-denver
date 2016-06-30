@@ -3,8 +3,9 @@ var router = express.Router();
 var knex = require('../db/knex');
 var db = require('../db/api');
 var moment = require('moment');
+var auth = require('../auth')
 
-router.get('/events', function (req, res, next) {
+router.get('/events', auth.isNotLoggedIn, function (req, res, next) {
   return Promise.all([
     knex('event').select(),
     db.isVolunteer(req.session.userId)
@@ -13,9 +14,11 @@ router.get('/events', function (req, res, next) {
   });
 });
 
-router.get('/events/create', function(req, res, next) {
-    // console.log(req.session.userId);
-    res.render('createevent', {account_id: req.session.userId});
+router.get('/events/create', auth.isNotLoggedIn, function(req, res, next) {
+    db.isVolunteer(req.session.userId).then(function (data) {
+      res.render('createevent', {account_id: req.session.userId, volunteer:data, id: req.session.userId});
+    })
+
 });
 
 router.post('/events/create', function(req, res, next) {
@@ -24,7 +27,7 @@ router.post('/events/create', function(req, res, next) {
   });
 });
 
-router.get('/events/:id', function (req, res, next) {
+router.get('/events/:id', auth.isNotLoggedIn, function (req, res, next) {
   return Promise.all([
     knex('event').select().where({id: req.params.id}).first(),
     knex('event')
@@ -44,7 +47,7 @@ router.get('/events/:id', function (req, res, next) {
 });
 
 //
-router.get('/events/:id/volunteer', function(req, res, next) {
+router.get('/events/:id/volunteer', auth.isNotLoggedIn, function(req, res, next) {
   console.log('req.params.id', req.params.id);
   return knex('vol_event').insert({account_id: req.session.userId, event_id: req.params.id}).then(function () {
     res.redirect('/events');
