@@ -10,25 +10,32 @@ router.get('/profile', function(req, res, next) {
 			Promise.all([
 				knex('account').where({id: req.session.userId}).first(),
 				knex('volunteer')
-				.select('volunteer_activity.activity')
-				.join('volunteer_activity', function() {
-					this.on('volunteer.activity_id', '=', 'volunteer_activity.id');
-				})
-				.where({account_id: req.session.userId})
-				.first(),
-				db.isVolunteer(req.session.userId)
+					.select('volunteer_activity.activity')
+					.join('volunteer_activity', function() {
+						this.on('volunteer.activity_id', '=', 'volunteer_activity.id');
+					})
+					.where({account_id: req.session.userId})
+					.first(),
+				db.isVolunteer(req.session.userId),
+				knex('event')
+					.select('event.title as title', 'event.id as id', 'event.date as date')
+					.join('vol_event', function() {
+						this.on('event.id', '=', 'vol_event.event_id');
+					})
+					.where('vol_event.account_id', '=', req.session.userId)
 			]).then(function(data) {
+				console.log(data[3]);
 				res.render('profile', {
 					account: data[0],
 					activities: data[1],
 					volunteer: data[2],
+					myevents: data[3],
 					id: req.session.userId
 				});
 			}).catch(function(err) {
 				console.log(err);
 			});
 		} else {
-			console.log("Have started Else Statement");
 			Promise.all([
 				knex('account').where({
 					id: req.session.userId

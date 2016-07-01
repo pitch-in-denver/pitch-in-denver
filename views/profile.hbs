@@ -20,24 +20,12 @@
                 <td>Phone</td>
                 <td>{{account.phone}}</td>
             </tr>
-
             {{#if volunteer}}
-
                 <tr>
                     <td>Volunteer activities</td>
                     <td>{{activities.activity}}</td>
                 </tr>
-
-            {{else}}
-
-                <!-- <tr>
-        <td>Title</td>
-        <td>{{title}}</td>
-      </tr> -->
-
-
             {{/if}}
-
             <tr>
                 <td>City</td>
                 <td>{{account.city}}</td>
@@ -55,7 +43,19 @@
             <button type="button" name="button" class="waves-effect waves-light btn">Create an Event <i class="fa fa-calendar"></i></button>
         </a>
         {{else}}
-        <a href="/events/" class="waves-effect waves-light btn">Events <i class="fa fa-calendar"></i></a>
+            <a href="/events/" class="waves-effect waves-light btn">Events <i class="fa fa-calendar"></i></a>
     {{/unless}}
+
+    <p>
+        <br>
+        {{#if volunteer}}
+            <h5>My events</h5>
+            <ul>
+                {{#each myevents}}
+                    <li>{{this.date}}: <a href="/events/{{this.id}}">{{this.title}}</a></li>
+                {{/each}}
+            </ul>
+        {{/if}}
+    </p>
 
 </div>
