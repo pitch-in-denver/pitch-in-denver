@@ -48,7 +48,6 @@ router.get('/events/create', auth.isNotLoggedIn, function(req, res, next) {
 			knex('volunteer_activity').select()
 		])
 		.then(function(data) {
-			console.log(data);
 			res.render('createevent', {
 				account_id: req.session.userId,
 				volunteer: data[0],
@@ -88,12 +87,11 @@ router.get('/events/:id', auth.isNotLoggedIn, function(req, res, next) {
 		.where('event.id', '=', req.params.id),
 		db.isVolunteer(req.session.userId)
 	]).then(function(data) {
-		console.log('data1=', data[0]);
 		res.render('event-detail', {
 			event: data[0],
 			volunteers: data[1],
 			picture: data[2][0],
-			volunteer: data[2],
+			volunteer: data[3],
 			id: req.session.userId
 		});
 	}).catch(function(error) {
@@ -103,7 +101,6 @@ router.get('/events/:id', auth.isNotLoggedIn, function(req, res, next) {
 
 //
 router.get('/events/:id/volunteer', auth.isNotLoggedIn, function(req, res, next) {
-	console.log('req.params.id', req.params.id);
 	return knex('vol_event').insert({
 		account_id: req.session.userId,
 		event_id: req.params.id
@@ -114,5 +111,15 @@ router.get('/events/:id/volunteer', auth.isNotLoggedIn, function(req, res, next)
 		next(error);
 	});
 });
-//test
+
+router.get('/events/:id/delete', function(req, res, next) {
+  knex('vol_event').where({event_id: req.params.id}).del().then(function() {
+    knex('event').where({id: req.params.id}).del().then(function() {
+      res.redirect('/events');
+    });
+  }).catch(function (error) {
+    console.log(error);
+  });
+});
+
 module.exports = router;

@@ -29,12 +29,17 @@
                         {{/each}}
                     </p>
                     <p>
+                      <br>
                         {{#if volunteer}}
-                            <a href="/events/{{event.id}}/volunteer">Volunteer for this event</a>
+                            <center><a href="/events/{{event.id}}/volunteer" class="waves-effect waves-light btn">Volunteer for this event</a></center>
+                        {{else}}
+                            <a href="/events/{{event.id}}/edit/" class="waves-effect waves-light btn">Edit Event</a>
+                            <a href="/events/{{event.id}}/delete/" class="waves-effect waves-light btn right">Delete Event</a>
                         {{/if}}
                     </p>
                 </div>
             </div>
+            <center><a href="/events" class="waves-effect waves-light btn">Back to Events</a></center>
         </div>
     </div>
 </div>

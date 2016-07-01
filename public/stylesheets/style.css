@@ -81,3 +81,7 @@ footer.page-footer {
 .frontlist {
   list-style:circle;
 }
+
+.btn-small {
+  font-size: 0.7em;
+}
