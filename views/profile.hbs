@@ -52,7 +52,7 @@
             <h5>My events</h5>
             <ul>
                 {{#each myevents}}
-                    <li>{{this.date}}: <a href="/events/{{this.id}}">{{this.title}}</a></li>
+                    <li>{{this.date}}: <a href="/events/{{this.id}}">{{this.title}}</a> | <a href="/events/{{this.id}}/deleteVol">DELETE</a></li>
                 {{/each}}
             </ul>
         {{/if}}

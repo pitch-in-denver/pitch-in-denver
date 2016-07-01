@@ -122,4 +122,12 @@ router.get('/events/:id/delete', function(req, res, next) {
   });
 });
 
+router.get('/events/:id/deleteVol', function(req, res, next) {
+  knex('vol_event').where({event_id: req.params.id}).del().then(function() {
+		res.redirect('/profile');
+  }).catch(function (error) {
+    console.log(error);
+  });
+});
+
 module.exports = router;
